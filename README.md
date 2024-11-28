@@ -91,9 +91,9 @@ project-root/
 └── README.md
 ```
 ## Future Enhancements
-Integration of an attendance tracking system.
-Implementation of report generation for student performance.
-Enhanced chatbot capabilities for deeper personalization.
+- Integration of an attendance tracking system.
+- Implementation of report generation for student performance.
+- Enhanced chatbot capabilities for deeper personalization.
 
 ## Contributing
 Contributions are welcome! Feel free to fork this repository and submit pull requests.
