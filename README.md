@@ -53,7 +53,7 @@ Classify is a full-stack web application designed to streamline classroom operat
    git clone https://github.com/your-username/classify.git
 2. Navigate to the project directory:
    ```bash  
-   cd classroom-management
+   cd classify
 
 3. Install dependencies for the backend:
    ```bash
