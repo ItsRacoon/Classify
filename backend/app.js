@@ -1,7 +1,8 @@
 const express = require('express')
+const dotenv=require('dotenv')
 const connectDB=require('./db/connect')
-// const Product=require("./models/products.models"); 
-// const productRoute=require("./routes/product.route")
+const authRoutes=require('./routes/auth')
+dotenv.config();
 const app=express();
 connectDB();
 
@@ -12,16 +13,11 @@ app.use(express.urlencoded({ extended: false}))
 
 
 //routes
-
+app.use('/api/auth',authRoutes)
 //HOME PAGE
 app.get('/',(req,res)=>{
-    res.send("Home Page")
+    res.send("API is running")
 })
-
-
-
-
-
 
 
 
