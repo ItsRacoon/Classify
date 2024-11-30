@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const Signup = () => {
   });
 
   const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -23,15 +25,18 @@ const Signup = () => {
     e.preventDefault(); // Prevent default form submission behavior
 
     try {
-      // Send a POST request to the backend
-      const response = await axios.post("http://localhost:8000/api/auth/signup", formData);
-
-      // Handle success response
+      const response = await axios.post(
+        "http://localhost:8000/api/auth/signup",
+        formData
+      );
       setMessage("Signup successful!");
+      setIsError(false); // Mark as success
       console.log("Response from server:", response.data);
     } catch (error) {
-      // Handle errors
-      setMessage(error.response?.data?.message || "Signup failed!");
+      setMessage(
+        error.response?.data?.message || "An error occurred. Please try again."
+      );
+      setIsError(true); // Mark as error
       console.error("Error during signup:", error);
     }
   };
@@ -39,6 +44,7 @@ const Signup = () => {
   return (
     <div className="d-flex justify-content-center align-items-center bg-secondary vh-100">
       <div className="bg-white p-3 rounded w-25">
+        <h1>Sign up</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="name">
@@ -49,8 +55,8 @@ const Signup = () => {
               placeholder="Enter your name"
               name="name"
               className="form-control rounded-0"
-              onChange={handleChange} // Update state on input change
-              value={formData.name} // Controlled input
+              onChange={handleChange}
+              value={formData.name}
               required
             />
           </div>
@@ -64,8 +70,8 @@ const Signup = () => {
               autoComplete="off"
               name="email"
               className="form-control rounded-0"
-              onChange={handleChange} // Update state on input change
-              value={formData.email} // Controlled input
+              onChange={handleChange}
+              value={formData.email}
               required
             />
           </div>
@@ -78,20 +84,27 @@ const Signup = () => {
               placeholder="Enter your password"
               name="password"
               className="form-control rounded-0"
-              onChange={handleChange} // Update state on input change
-              value={formData.password} // Controlled input
+              onChange={handleChange}
+              value={formData.password}
               required
             />
           </div>
           <button type="submit" className="btn btn-success w-100 rounded-0">
             SignUp
           </button>
-          <p className="text-success mt-2">{message}</p>
-          <p>Already have an account?</p>
-          <button type="button" className="btn bg-white text-black btn-success w-100 rounded-0">
-            Login
-          </button>
+          {message && (
+            <p className={isError ? "text-danger mt-2" : "text-success mt-2"}>
+              {message}
+            </p>
+          )}
         </form>
+        <p>Already have an account? :D</p>
+        <Link
+          to="/Login"
+          className="btn btn-outline-success w-100 rounded-0"
+        >
+          Login
+        </Link>
       </div>
     </div>
   );
