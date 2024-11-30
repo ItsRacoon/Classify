@@ -1,20 +1,25 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
-  const [email, setEmail] = useState(""); // State for email
-  const [password, setPassword] = useState(""); // State for password
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent form from refreshing the page
+    e.preventDefault();
+    console.log("Submitting login form:", { email, password });
     try {
-      const response = await axios.post("/api/login", { email, password }); // Replace '/api/login' with your login endpoint
+      const response = await axios.post("http://localhost:8000/api/auth/login", { email, password });
       console.log("Login successful:", response.data);
-      // Add logic for successful login, such as redirecting the user
+      setMessage("Login successful!");
+      setIsError(false);
     } catch (error) {
       console.error("Login failed:", error);
-      // Add error handling logic
+      setMessage(error.response?.data?.message || "Login failed. Please try again.");
+      setIsError(true);
     }
   };
 
@@ -33,7 +38,7 @@ const Login = () => {
               autoComplete="off"
               name="email"
               className="form-control rounded-0"
-              value={email} // Controlled input
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -46,7 +51,7 @@ const Login = () => {
               placeholder="Enter your password"
               name="password"
               className="form-control rounded-0"
-              value={password} // Controlled input
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
@@ -54,9 +59,20 @@ const Login = () => {
             Login
           </button>
         </form>
-        <p>Don't have an account :( </p>
-            <Link
-          to="/register"  // Navigate to the login page
+
+        {/* Display feedback message */}
+        {message && (
+          <div
+            className={`alert ${isError ? "alert-danger" : "alert-success"} mt-3`}
+            style={{ textAlign: "center" }}
+          >
+            {message}
+          </div>
+        )}
+
+        <p>Don't have an account :(</p>
+        <Link
+          to="/register"
           className="btn bg-white text-black btn-success w-100 rounded-0"
         >
           Signup
