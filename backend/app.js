@@ -3,6 +3,9 @@ const cors=require('cors')
 const dotenv=require('dotenv')
 const connectDB=require('./db/connect')
 const authRoutes=require('./routes/auth')
+const adminRoutes=require('./routes/admin')
+const teacherRoutes=require('./routes/teacher')
+const studentRoutes=require('./routes/student')
 dotenv.config();
 const app=express();
 app.use(cors())
@@ -14,8 +17,12 @@ app.use(express.urlencoded({ extended: false}))
 
 
 
+
 //routes
 app.use('/api/auth',authRoutes)
+app.use('/api/admin',adminRoutes)
+app.use('/api/teacher', teacherRoutes);
+app.use('/api/student', studentRoutes);
 //HOME PAGE
 app.get('/',(req,res)=>{
     res.send("API is running")

@@ -1,55 +1,64 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
+    role: "", // Include role directly in formData
   });
 
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
 
-  // New state for the dropdown
-  const [selectedOption, setSelectedOption] = useState("");
+  const navigate = useNavigate(); // Hook to navigate after successful signup
 
   // Handle input changes for the form
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "role") {
-      // For dropdown, we update the selectedOption
-      setSelectedOption(value);
-    } else {
-      // For other inputs, we update the formData
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
 
-    // You might want to include the selected role in your form data when submitting
-    const dataToSend = { ...formData, role: selectedOption };
+    // Ensure the role is selected
+    if (!formData.role) {
+      setMessage("Please select a role.");
+      setIsError(true);
+      return;
+    }
 
     try {
       const response = await axios.post(
         "http://localhost:8000/api/auth/signup",
-        dataToSend
+        formData
       );
-      setMessage("Signup successful!");
+      const successMessage = response.data?.message || "User created successfully!";
+      alert(successMessage); // Show an alert for success
+      setMessage(successMessage);
       setIsError(false); // Mark as success
       console.log("Response from server:", response.data);
+
+      // Redirect the user to the login page after successful signup
+      navigate("/login");
     } catch (error) {
-      setMessage(
-        error.response?.data?.message || "An error occurred. Please try again."
-      );
+      const errorMessage =
+        error.response?.data?.message || "An error occurred. Please try again.";
+
+      // Show specific alert if the user already exists
+      if (error.response?.data?.message === "User already exists") {
+        alert("User already exists. Please login or use a different email.");
+      }
+
+      setMessage(errorMessage);
       setIsError(true); // Mark as error
       console.error("Error during signup:", error);
     }
@@ -104,24 +113,22 @@ const Signup = () => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="dropdown">
-              <strong>You want to login as :p</strong>
+            <label htmlFor="role">
+              <strong>Role</strong>
             </label>
             <select
-              id="dropdown"
-              name="role"  // Make sure this matches the property you're updating
-              value={selectedOption}
+              id="role"
+              name="role"
+              value={formData.role}
               onChange={handleChange}
               className="form-control rounded-0"
               required
             >
-              <option value="">Select any one of the above</option>
+              <option value="">Select a role</option>
               <option value="admin">Admin</option>
               <option value="teacher">Teacher</option>
               <option value="student">Student</option>
             </select>
-
-            {selectedOption && <p>You selected: {selectedOption}</p>}
           </div>
 
           <button type="submit" className="btn btn-success w-100 rounded-0">
@@ -136,7 +143,7 @@ const Signup = () => {
         </form>
 
         <p>Already have an account? :D</p>
-        <Link to="/Login" className="btn btn-outline-success w-100 rounded-0">
+        <Link to="/login" className="btn btn-outline-success w-100 rounded-0">
           Login
         </Link>
       </div>
