@@ -12,22 +12,36 @@ const Signup = () => {
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
 
-  // Handle input changes
+  // New state for the dropdown
+  const [selectedOption, setSelectedOption] = useState("");
+
+  // Handle input changes for the form
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+
+    if (name === "role") {
+      // For dropdown, we update the selectedOption
+      setSelectedOption(value);
+    } else {
+      // For other inputs, we update the formData
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
 
+    // You might want to include the selected role in your form data when submitting
+    const dataToSend = { ...formData, role: selectedOption };
+
     try {
       const response = await axios.post(
         "http://localhost:8000/api/auth/signup",
-        formData
+        dataToSend
       );
       setMessage("Signup successful!");
       setIsError(false); // Mark as success
@@ -89,20 +103,40 @@ const Signup = () => {
               required
             />
           </div>
+          <div className="mb-3">
+            <label htmlFor="dropdown">
+              <strong>You want to login as :p</strong>
+            </label>
+            <select
+              id="dropdown"
+              name="role"  // Make sure this matches the property you're updating
+              value={selectedOption}
+              onChange={handleChange}
+              className="form-control rounded-0"
+              required
+            >
+              <option value="">Select any one of the above</option>
+              <option value="admin">Admin</option>
+              <option value="teacher">Teacher</option>
+              <option value="student">Student</option>
+            </select>
+
+            {selectedOption && <p>You selected: {selectedOption}</p>}
+          </div>
+
           <button type="submit" className="btn btn-success w-100 rounded-0">
-            SignUp
+            Sign Up
           </button>
+
           {message && (
             <p className={isError ? "text-danger mt-2" : "text-success mt-2"}>
               {message}
             </p>
           )}
         </form>
+
         <p>Already have an account? :D</p>
-        <Link
-          to="/Login"
-          className="btn btn-outline-success w-100 rounded-0"
-        >
+        <Link to="/Login" className="btn btn-outline-success w-100 rounded-0">
           Login
         </Link>
       </div>
