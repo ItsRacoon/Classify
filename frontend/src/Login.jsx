@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 const Login = () => {
@@ -7,6 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,8 +16,10 @@ const Login = () => {
     try {
       const response = await axios.post("http://localhost:8000/api/auth/login", { email, password });
       console.log("Login successful:", response.data);
+      const token = response.data.token;
       setMessage("Login successful!");
       setIsError(false);
+      navigate('/Student');
     } catch (error) {
       console.error("Login failed:", error);
       setMessage(error.response?.data?.message || "Login failed. Please try again.");
@@ -27,7 +31,7 @@ const Login = () => {
     <div className="d-flex justify-content-center align-items-center  vh-100"
     style={{ backgroundColor: "#0d192b" }}>
       <div>
-        <h1 style={{ color: "white" }}>Sign In</h1>
+        <h1 style={{ color: "white" }}>Sign In :D</h1>
         <form className="form" onSubmit={handleSubmit}>
           <div className="flex-column mb-3">
             <label htmlFor="email">Email</label>
