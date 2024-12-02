@@ -29,9 +29,9 @@ const Login = () => {
 
   return (
     <div className="d-flex justify-content-center align-items-center  vh-100"
-    style={{ backgroundColor: "#0d192b" }}>
+    style={{ background: "radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%)" }}>
       <div>
-        <h1 style={{ color: "white" }}>Sign In</h1>
+        <h1 style={{ color: "white" }}>Sign In </h1>
         <form className="form" onSubmit={handleSubmit}>
           <div className="flex-column mb-3">
             <label htmlFor="email">Email</label>

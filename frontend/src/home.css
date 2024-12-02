@@ -104,12 +104,22 @@
 }
 
 .homeText{
-    font-size: 20px;
-    background: -webkit-linear-gradient(white, #99c1ed);
-    margin-top: 10px;
+
+
+    font-size: 18px;
+    background: -webkit-linear-gradient(white, #4f6a85);
+    margin-top: 30px;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    letter-spacing: 4px;
+    letter-spacing: 5px;
+    margin-right: 75px;
+    margin-left: 75px;
+}
+.aboutUs{
+    font-size: 20px;
+    margin-top: -10px;
+    letter-spacing: 7px;
+
 }
 #title {
     position: absolute;
@@ -122,7 +132,7 @@
     font-weight: 300;
     font-size: 50px;
     letter-spacing: 10px;
-    margin-top: -60px;
+    margin-top: -80px;
     padding-left: 10px;
   }
   #title span {
