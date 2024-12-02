@@ -27,42 +27,36 @@ const Signup = () => {
 
   // Handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-
-    // Ensure the role is selected
+    e.preventDefault();
+  
     if (!formData.role) {
       setMessage("Please select a role.");
       setIsError(true);
       return;
     }
-
+  
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/auth/signup",
-        formData
-      );
-      const successMessage = response.data?.message || "User created successfully!";
-      alert(successMessage); // Show an alert for success
-      setMessage(successMessage);
-      setIsError(false); // Mark as success
-      console.log("Response from server:", response.data);
+      const response = await axios.post("http://localhost:8000/api/auth/signup", formData);
+      setMessage("User created successfully!");
+      setIsError(false);
+  
+      setTimeout(() => navigate("/login"), 1500);
 
-      // Redirect the user to the login page after successful signup
-      navigate("/login");
     } catch (error) {
-      const errorMessage =
-        error.response?.data?.message || "An error occurred. Please try again.";
-
-      // Show specific alert if the user already exists
-      if (error.response?.data?.message === "User already exists") {
-        alert("User already exists. Please login or use a different email.");
+      let errorMessage = "An error occurred. Please try again.";
+      if (error.response) {
+        // Check specific error responses
+        if (error.response.status === 409) {
+          errorMessage = "User already exists. Please login or use a different email.";
+        } else if (error.response.status === 400) {
+          errorMessage = error.response.data.message || "Invalid data provided.";
+        }
       }
-
       setMessage(errorMessage);
-      setIsError(true); // Mark as error
-      console.error("Error during signup:", error);
+      setIsError(true);
     }
   };
+  
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100"

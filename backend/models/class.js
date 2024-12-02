@@ -1,12 +1,12 @@
 const mongoose=require('mongoose')
-
+const User=require('./user')
 const classSchema=new mongoose.Schema({
     subject:{
         type:String,
         required:true,
     },
     teacher:{
-        type:mongoose.Schema.Types.ObjectId,
+        type:String,
         ref:'User',
         required:true,
     },
@@ -16,7 +16,7 @@ const classSchema=new mongoose.Schema({
     },
     students:[
         {
-            type:mongoose.Schema.Types.ObjectId,
+            type:String,
             ref:'User'
         },
     ],

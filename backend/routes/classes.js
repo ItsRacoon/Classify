@@ -15,7 +15,7 @@ router.post('/create',async(req,res)=>{
             link,
         });
         await newClass.save();
-        res.status(201).json({message:'Class created successfully,class:newClass'})
+        res.status(201).json({message:'Class created successfully'})
     }catch(error){
         res.status(500).json({message:'Server error',error:error.message})
     }
