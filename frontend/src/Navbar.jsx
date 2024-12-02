@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './home.css';  
+
 <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'></link>
 
 const Navbar = () => {

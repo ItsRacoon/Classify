@@ -1,6 +1,5 @@
 import react from "react";
 import Navbar from "./Navbar"; 
-import Cards from "./Cards";
 import { Link } from "react-router-dom";
 import './home.css';
 const Home = () =>{
@@ -15,10 +14,10 @@ const Home = () =>{
     Classify
   </span>
   <br />
-  <p className="homeText">Classify is a web platform that streamlines student-teacher interactions. Teachers can create classes, share assignments, and manage submissions, while students can join classes, access materials, and submit their work. It simplifies classroom management and enhances collaboration.
+  <p className="homeText">Classify is an innovative web-based platform that simplifies classroom management and fosters collaboration between students and teachers. Teachers can create classes, share assignments, and upload resources, while students can join classes, access materials, and submit their work online. The platform ensures an organized and efficient learning environment by streamlining the process of sharing and tracking assignments.
   </p>
-
-
+  <span className="aboutUs"><Link to="/Cards">About Us</Link></span>
+  
   </div>
   
   
