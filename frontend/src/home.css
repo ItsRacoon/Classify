@@ -104,12 +104,12 @@
 }
 
 .homeText{
-    font-size: 15px;
-    background: -webkit-linear-gradient(white, #38495a);
+    font-size: 20px;
+    background: -webkit-linear-gradient(white, #99c1ed);
     margin-top: 10px;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    
+    letter-spacing: 4px;
 }
 #title {
     position: absolute;
