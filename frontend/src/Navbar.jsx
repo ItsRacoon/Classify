@@ -18,7 +18,7 @@ const Navbar = () => {
     </div>
 </button>
 <button className="navButton">
-    <Link to="/register">Sign In</Link>
+    <Link to="/login">Sign In</Link>
     <div class="arrow-wrapper">
         <div class="arrow"></div>
 

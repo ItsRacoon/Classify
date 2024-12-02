@@ -1,8 +1,7 @@
-const { Schema } = require('@mui/icons-material')
 const mongoose=require('mongoose')
 
 const classSchema=new mongoose.Schema({
-    Subject:{
+    subject:{
         type:String,
         required:true,
     },

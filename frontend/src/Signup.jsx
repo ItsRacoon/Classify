@@ -68,7 +68,7 @@ const Signup = () => {
     <div className="d-flex justify-content-center align-items-center vh-100"
     style={{ backgroundColor: "#0d192b" }}>
       <div >
-        <h1 style={{ color: "white" }}>Sign up :D</h1>
+        <h1 style={{ color: "white" }}>Sign up </h1>
         <form className="form" onSubmit={handleSubmit}>
           <div className="flex-column ">
             <label htmlFor="name">

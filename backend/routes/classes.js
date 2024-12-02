@@ -4,7 +4,7 @@ const Class=require('../models/class')
 
 const router=express.Router();
 
-router.post('/create',authenticate,authorize(['admin','teacher']),async(req,res)=>{
+router.post('/create',async(req,res)=>{
     const {subject,teacher,time,students,link}=req.body;
     try{
         const newClass=new Class({
