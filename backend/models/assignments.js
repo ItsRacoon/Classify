@@ -1,0 +1,50 @@
+const mongoose=require('mongoose')
+
+const assignmentSchema=new mongoose.Schema({
+    teacher:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User',
+        required:true
+    },
+    subject:{
+        type:String,
+        required:true
+    },
+    description:{
+        type:String,
+        required:false
+    },
+    deadline:{
+        type:Date,
+        required:true
+    },
+    students:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'User'
+        }
+    ],
+    submissions:[
+        {
+            student:{
+                type:mongoose.Schema.Types.ObjectId,
+                ref:'User',
+                required:true
+            },
+            file:{
+                type:String,
+                required:true
+            },
+            dateSubmitted:{
+                type:Date,
+                default:Date.now()
+            },
+        }
+    ],
+    datePosted:{
+        type:Date,
+        default:Date.now()
+    }
+});
+
+module.exports=mongoose.model('Assignment',assignmentSchema)
