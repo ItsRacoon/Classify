@@ -85,7 +85,7 @@ const Teacher = () => {
 
       {/* Table */}
       <div className="table-container">
-        <h3>Weekly Schedule</h3>
+        <h3 className="weekly-schedule">Weekly Schedule</h3>
         <table className="styled-table">
           <thead>
             <tr>
@@ -113,8 +113,8 @@ const Teacher = () => {
                 {Array.from({ length: 5 }).map((_, colIndex) => (
                   <td key={colIndex} className="table-cell">
                     <div className="cell-content">
-                      <p>Teachers:</p>
-                      <p>Students:</p>
+                      <p className="text-teacher">Teachers:</p>
+                      <p className="text-student">Students:</p>
                       <button className="add-class-btn">Add Class</button>
                     </div>
                   </td>

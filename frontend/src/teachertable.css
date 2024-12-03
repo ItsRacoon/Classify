@@ -115,3 +115,20 @@ html{
   overflow: scroll;
 
 }
+
+.text-teacher {
+  color: darkblue;
+  font-weight: bold; 
+}
+
+.text-student {
+  color: maroon; 
+  font-weight: bold; 
+}
+
+.weekly-schedule {
+  color: whitesmoke; 
+  font-weight: bold; 
+  text-align: center;
+  margin-bottom: 10px;
+}

@@ -102,7 +102,7 @@
   }
   
   .add-class-btncr {
-    background-color: #000000;
+    background-color: green;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -112,7 +112,7 @@
     cursor: pointer;
   }
   .add-class-btnup {
-    background-color: #0cf643;
+    background-color: rgb(118, 39, 192);
     color: white;
     border: none;
     padding: 5px 10px;
@@ -122,7 +122,7 @@
     cursor: pointer;
   }
   .add-class-btndl {
-    background-color: #771313;
+    background-color: rgb(221, 57, 57);
     color: white;
     border: none;
     padding: 5px 10px;
