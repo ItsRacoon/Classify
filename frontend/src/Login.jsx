@@ -19,7 +19,7 @@ const Login = () => {
       const token = response.data.token;
       setMessage("Login successful!");
       setIsError(false);
-      navigate('/Student');
+      navigate('/Teacher');
     } catch (error) {
       console.error("Login failed:", error);
       setMessage(error.response?.data?.message || "Login failed. Please try again.");
