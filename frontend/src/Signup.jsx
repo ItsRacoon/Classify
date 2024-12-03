@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Navsec from "./Navsec";
 import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
@@ -41,23 +42,21 @@ const Signup = () => {
         "http://localhost:8000/api/auth/signup",
         formData
       );
-      setMessage("User created successfully.");
+      const successMessage = response.data?.message || "User created successfully!";
+      alert(successMessage); // Show an alert for success
+      setMessage(successMessage);
       setIsError(false); // Mark as success
       console.log("Response from server:", response.data);
 
       // Redirect the user to the login page after successful signup
-      setTimeout(() => {
-        navigate("/login");
-      }, 1000);
+      navigate("/login");
     } catch (error) {
-      let errorMessage = "An error occurred. Please try again.";
-      if (error.response) {
-        // Check specific error responses
-        if (error.response.status === 409) {
-          errorMessage = "User already exists. Please login or use a different email.";
-        } else if (error.response.status === 400) {
-          errorMessage = error.response.data.message || "Invalid data provided.";
-        }
+      const errorMessage =
+        error.response?.data?.message || "An error occurred. Please try again.";
+
+      // Show specific alert if the user already exists
+      if (error.response?.data?.message === "User already exists") {
+        alert("User already exists. Please login or use a different email.");
       }
 
       setMessage(errorMessage);
@@ -67,8 +66,15 @@ const Signup = () => {
   };
 
   return (
+    <div>
+    
     <div className="d-flex justify-content-center align-items-center vh-100"
     style={{ background: "radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%)" }}>
+          <div className="navSecLeft">
+        <h1>
+          <Link to="/">Classify</Link>
+        </h1>
+      </div>
       <div >
         <h1 style={{ color: "white" }}>Sign up</h1>
         <form className="form" onSubmit={handleSubmit}>
@@ -263,6 +269,7 @@ const Signup = () => {
         </form>
         
       </div>
+    </div>
     </div>
   );
 };
