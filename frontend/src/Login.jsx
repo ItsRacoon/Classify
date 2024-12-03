@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Navsec from "./Navsec";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
@@ -19,7 +20,7 @@ const Login = () => {
       const token = response.data.token;
       setMessage("Login successful!");
       setIsError(false);
-      navigate('/Teacher');
+      navigate('/Student');
     } catch (error) {
       console.error("Login failed:", error);
       setMessage(error.response?.data?.message || "Login failed. Please try again.");
@@ -28,8 +29,17 @@ const Login = () => {
   };
 
   return (
+    <div> 
+      
+      
+    
     <div className="d-flex justify-content-center align-items-center  vh-100"
     style={{ background: "radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%)" }}>
+     <div className="navSecLeft">
+        <h1>
+          <Link to="/">Classify</Link>
+        </h1>
+      </div>
       <div>
         <h1 style={{ color: "white" }}>Sign In </h1>
         <form className="form" onSubmit={handleSubmit}>
@@ -179,6 +189,7 @@ const Login = () => {
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 };
