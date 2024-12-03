@@ -43,13 +43,14 @@ const Signup = () => {
         formData
       );
       const successMessage = response.data?.message || "User created successfully!";
-      alert(successMessage); // Show an alert for success
       setMessage(successMessage);
       setIsError(false); // Mark as success
       console.log("Response from server:", response.data);
 
       // Redirect the user to the login page after successful signup
-      navigate("/login");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1400);
     } catch (error) {
       const errorMessage =
         error.response?.data?.message || "An error occurred. Please try again.";
