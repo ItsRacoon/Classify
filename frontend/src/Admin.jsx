@@ -91,7 +91,7 @@ const Admin = () => {
 
       {/* Table */}
       <div className="table-container">
-        <h3>Weekly Schedule</h3>
+        <h3 classname="admin-header">Weekly Schedule</h3>
         <table className="styled-table">
           <thead>
             <tr>
