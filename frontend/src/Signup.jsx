@@ -39,7 +39,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/auth/signup",
+        "http://localhost:8000/api/auth/register",
         formData
       );
       const successMessage = response.data?.message || "User created successfully!";

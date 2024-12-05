@@ -18,9 +18,23 @@ const Login = () => {
       const response = await axios.post("http://localhost:8000/api/auth/login", { email, password });
       console.log("Login successful:", response.data);
       const token = response.data.token;
+      const role=response.data.role;
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', role);
       setMessage("Login successful!");
       setIsError(false);
-      navigate('/Teacher');
+      setTimeout(() => {
+        if (role === 'teacher') {
+          navigate('/Teacher'); 
+        } else if (role === 'student') {
+          navigate('/Student');
+        } else if(role=== 'admin'){
+          navigate('/Admin');
+        } 
+        else {
+          navigate('/');
+        }
+      }, 1500);
     } catch (error) {
       console.error("Login failed:", error);
       setMessage(error.response?.data?.message || "Login failed. Please try again.");
