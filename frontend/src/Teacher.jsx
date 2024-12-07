@@ -1,10 +1,21 @@
 import React, { useState } from "react";
-import "./teachertable.css";
+import Navsec from "./Navsec";
+import "./teacher.css";
+import Navbar from "./Navbar";
 
 const Teacher = () => {
   const [fileName, setFileName] = useState("");
   const [studentName, setStudentName] = useState("");
   const [subject, setSubject] = useState("");
+  const [schedule, setSchedule] = useState({}); // Manage classes for the schedule
+  const [modalVisible, setModalVisible] = useState(false); // Toggle modal visibility
+  const [selectedCell, setSelectedCell] = useState({ day: "", time: "" }); // Track the cell selected
+  const [classDetails, setClassDetails] = useState({
+    teacher: "",
+    student: "",
+    subject: "",
+  });
+  const [isClassCancelled, setIsClassCancelled] = useState(false); // Track cancellation status
 
   const handleFileChange = (event) => {
     setFileName(event.target.files[0]?.name || "");
@@ -24,64 +35,71 @@ const Teacher = () => {
     console.log("Student Name:", studentName);
     console.log("Subject:", subject);
     console.log("File Name:", fileName);
+  };
 
-    // Add your form submission logic here
+  const handleAddClassClick = (day, time) => {
+    setSelectedCell({ day, time });
+    setModalVisible(true);
+  };
+
+  const handleModalSubmit = (event) => {
+    event.preventDefault();
+    const { day, time } = selectedCell;
+
+    // Update the schedule state with the new class details
+    setSchedule((prevSchedule) => ({
+      ...prevSchedule,
+      [day]: {
+        ...prevSchedule[day],
+        [time]: { ...classDetails },
+      },
+    }));
+
+    // Reset modal details
+    setModalVisible(false);
+    setClassDetails({ teacher: "", student: "", subject: "" });
+  };
+
+  const handleClassDetailsChange = (event) => {
+    const { name, value } = event.target;
+    setClassDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value,
+    }));
+  };
+
+  const handleEditClassClick = (day, time) => {
+    setSelectedCell({ day, time });
+    setClassDetails({
+      teacher: schedule[day]?.[time]?.teacher || "",
+      student: schedule[day]?.[time]?.student || "",
+      subject: schedule[day]?.[time]?.subject || "",
+    });
+    setModalVisible(true);
+  };
+
+  const handleCancelClassClick = (day, time) => {
+    // Set the class as cancelled
+    setIsClassCancelled(true);
+
+    // Remove class details from the schedule
+    setSchedule((prevSchedule) => {
+      const updatedSchedule = { ...prevSchedule };
+      if (updatedSchedule[day]) {
+        delete updatedSchedule[day][time];
+      }
+      return updatedSchedule;
+    });
   };
 
   return (
+    <div>
+      <Navbar />
+      
     <div className="teacher-container">
-      {/* Rectangle box */}
-      <div className="rectangle-box">
-        <h2>POST ASSIGNMENT</h2>
-
-        <form onSubmit={handleSubmit}>
-          {/* Student Input */}
-          <div className="form-group">
-            <label htmlFor="textInput">Assign Student:</label>
-            <input
-              type="text"
-              id="textInput"
-              value={studentName}
-              onChange={handleStudentNameChange}
-              placeholder="Enter the student's name"
-            />
-          </div>
-
-          {/* Subject Dropdown */}
-          <div className="form-group">
-            <label htmlFor="dropdown">Select Subject:</label>
-            <select
-              id="dropdown"
-              value={subject}
-              onChange={handleSubjectChange}
-            >
-              <option value="">Select</option>
-              <option value="DSA">DSA</option>
-              <option value="ACD">ACD</option>
-              <option value="CN">CN</option>
-              <option value="OS">Operating Systems</option>
-              <option value="DBMS">Database Management Systems</option>
-              <option value="ML">Machine Learning</option>
-              <option value="AI">Artificial Intelligence</option>
-              <option value="WEB">Web Development</option>
-              <option value="NETWORKS">Computer Networks</option>
-              <option value="CLOUD">Cloud Computing</option>
-            </select>
-          </div>
-
-          {/* File Upload */}
-          <div className="form-group">
-            <label htmlFor="fileInput">Upload File:</label>
-            <input type="file" id="fileInput" onChange={handleFileChange} />
-            {fileName && <p>Selected File: {fileName}</p>}
-          </div>
-
-          {/* Submit Button */}
-          <button type="submit" className="submit-btn">
-            Submit
-          </button>
-        </form>
-      </div>
+    <Navsec />
+      
+      
 
       {/* Table */}
       <div className="table-container">
@@ -110,20 +128,60 @@ const Teacher = () => {
             ].map((time, rowIndex) => (
               <tr key={rowIndex}>
                 <td>{time}</td>
-                {Array.from({ length: 5 }).map((_, colIndex) => (
-                  <td key={colIndex} className="table-cell">
-                    <div className="cell-content">
-                      <p className="text-teacher">Teachers:</p>
-                      <p className="text-student">Students:</p>
-                      <button className="add-class-btn">Add Class</button>
-                    </div>
-                  </td>
-                ))}
+                {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map(
+                  (day) => (
+                    <td key={day} className="table-cell">
+                      <div className="cell-content">
+                        {
+                          <button
+                            className="add-class-btn"
+                            onClick={() => handleAddClassClick(day, time)}
+                          >
+                            View Class
+                          </button>
+                        }
+                      </div>
+                    </td>
+                  )
+                )}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      {/* Modal for adding or editing a class */}
+      {modalVisible && (
+        <div className="modal">
+          <form onSubmit={handleModalSubmit} className="modal-form">
+            <h3> View Class Details</h3>
+            <div className="classDetail">
+              <p>Subject :</p>
+              <p>Mode :</p>
+            </div>
+            <div className="button-container">
+              <button type="submit" className="submit-btn">
+                Change Mode
+              </button>
+              <button type="submit" className="submit-btn">
+                Cancel Class
+              </button>
+            </div>
+
+            <button type="submit" className="submit-btn">
+              Generate Class
+            </button>
+            <button
+              type="button"
+              className="close-btn"
+              onClick={() => setModalVisible(false)}
+            >
+              Close
+            </button>
+          </form>
+        </div>
+      )}
+    </div>
     </div>
   );
 };

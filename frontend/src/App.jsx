@@ -6,6 +6,8 @@ import Home from './Home';
 import Cards from './Cards';
 import Teacher from './Teacher';
 import Admin from './Admin';
+import Teacher_assign from './Teacher_assign';
+import Teacher_Notes from './Teacher_Notes';
 import './index.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
@@ -26,6 +28,8 @@ function App() {
         <Route path="/register" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/Cards" element={<Cards />} />
+        <Route path="/Teacher_assign" element={<Teacher_assign />} />
+        <Route path="./Techer_Notes" element={<Teacher_Notes />} />
         
         {/* Protected Routes */}
         <Route
