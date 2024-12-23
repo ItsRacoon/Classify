@@ -3,7 +3,7 @@ import Navsec from "./Navsec";
 import Navbar from "./Navbar";
 import "./teacher.css";
 
-const Teacher = () => {
+const Teacher_assign = () => {
   const [fileName, setFileName] = useState("");
   const [studentName, setStudentName] = useState("");
   const [subject, setSubject] = useState("");
@@ -94,4 +94,4 @@ const Teacher = () => {
   );
 };
 
-export default Teacher;
+export default Teacher_assign;

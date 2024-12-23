@@ -4,7 +4,7 @@ import "./teacher.css";
 import Navbar from "./Navbar";
 
 
-const Teacher = () => {
+const Teacher_Notes = () => {
   const [fileName, setFileName] = useState("");
   const [studentName, setStudentName] = useState("");
   const [subject, setSubject] = useState("");
