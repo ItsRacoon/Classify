@@ -12,7 +12,7 @@ const Navsec = () => {
         <Link to="/Teacher_assign"><span>Assignment</span></Link>
       </div>
       <div className="dashNavRight">
-        <Link to="/Teacher_Notes"><span>Notes</span></Link>
+        <Link to="/Teacher_notes"><span>Notes</span></Link>
       </div>
     </div>
   );

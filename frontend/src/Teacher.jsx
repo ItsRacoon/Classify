@@ -100,55 +100,74 @@ const Teacher = () => {
     <Navsec />
       
       
-
-      {/* Table */}
-      <div className="table-container">
-        <h3 className="weekly-schedule">Weekly Schedule</h3>
-        <table className="styled-table">
-          <thead>
-            <tr>
-              <th>Time</th>
-              <th>Monday</th>
-              <th>Tuesday</th>
-              <th>Wednesday</th>
-              <th>Thursday</th>
-              <th>Friday</th>
-            </tr>
-          </thead>
-          <tbody>
-            {[
-              "9:00 AM",
-              "10:00 AM",
-              "11:00 AM",
-              "12:00 PM",
-              "1:00 PM",
-              "2:00 PM",
-              "3:00 PM",
-              "4:00 PM",
-            ].map((time, rowIndex) => (
-              <tr key={rowIndex}>
-                <td>{time}</td>
-                {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map(
-                  (day) => (
-                    <td key={day} className="table-cell">
-                      <div className="cell-content">
-                        {
-                          <button
-                            className="add-class-btn"
-                            onClick={() => handleAddClassClick(day, time)}
-                          >
-                            View Class
-                          </button>
-                        }
-                      </div>
-                    </td>
-                  )
+    <div className="table-container">
+  <h3 className="weekly-schedule">Weekly Schedule</h3>
+  <table className="styled-table">
+    <thead>
+      <tr>
+        <th>Day</th>
+        {[
+          "9:00 AM",
+          "10:00 AM",
+          "11:00 AM",
+          "12:00 PM",
+          "1:00 PM",
+          "2:00 PM",
+          "3:00 PM",
+          "4:00 PM",
+        ].map((time, index) => (
+          <th key={index}>{time}</th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map((day, dayIndex) => (
+        <tr key={day}>
+          <td>{day}</td>
+          {[
+            "9:00 AM",
+            "10:00 AM",
+            "11:00 AM",
+            "12:00 PM",
+            "1:00 PM",
+            "2:00 PM",
+            "3:00 PM",
+            "4:00 PM",
+          ].map((time) => (
+            <td key={time}>
+              <div className="cell-content">
+                {time === "1:00 PM" ? (
+                  // Display LUNCH letters for 1:00 PM
+                  dayIndex === 0
+                    ? "L"
+                    : dayIndex === 1
+                    ? "U"
+                    : dayIndex === 2
+                    ? "N"
+                    : dayIndex === 3
+                    ? "C"
+                    : dayIndex === 4
+                    ? "H"
+                    : ""
+                ) : (
+                  <button
+                    className="add-class-btn"
+                    onClick={() => handleAddClassClick(day, time)}
+                  >
+                    View Class
+                  </button>
                 )}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+              </div>
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+      
+
 
       {/* Modal for adding or editing a class */}
       {modalVisible && (
@@ -156,8 +175,8 @@ const Teacher = () => {
           <form onSubmit={handleModalSubmit} className="modal-form">
             <h3> View Class Details</h3>
             <div className="classDetail">
-              <p>Subject :</p>
-              <p>Mode :</p>
+            <p>Subject : <span className="classStatus">Physics</span></p>
+              <p>Mode : <span className="classStatus">Offline</span></p>
             </div>
             <div className="button-container">
               <button type="submit" className="submit-btn">

@@ -7,7 +7,7 @@ import Cards from './Cards';
 import Teacher from './Teacher';
 import Admin from './Admin';
 import Teacher_assign from './Teacher_assign';
-import Teacher_Notes from './Teacher_Notes';
+import Teacher_notes from './Teacher_notes';
 import './index.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
@@ -29,7 +29,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/Cards" element={<Cards />} />
         <Route path="/Teacher_assign" element={<Teacher_assign />} />
-        <Route path="/Techer_Notes" element={<Teacher_Notes />} />
+        <Route path="/Teacher_notes" element={<Teacher_notes />} />
         
         {/* Protected Routes */}
         <Route
