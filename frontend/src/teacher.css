@@ -1,0 +1,211 @@
+/* General container */
+.teacher-container {
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #122b44;
+}
+
+
+
+
+/* Table styles */
+.table-container {
+  margin-top: 20px;
+}
+
+.styled-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 16px;
+  width: 100%; 
+  min-width: 1200px !important;/* Make the table span the full width */
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  
+}
+
+
+.styled-table tr {
+  border-top: none;
+  border-bottom: none;
+}
+
+.styled-table th,
+.styled-table td {
+  text-align: center;
+  padding: 12px;
+  width: auto; /* Adjust width dynamically */
+  box-sizing: border-box;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd; /* Include padding and border in width calculation */
+}
+
+.styled-table th {
+  background-color: #000000;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.styled-table tr:nth-of-type(even) {
+  background-color: #393535;
+}
+.styled-table tr:nth-of-type(odd) {
+  background-color: #ffffff;
+}
+
+
+.table-cell .cell-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Ensure cell content is vertically aligned */
+}
+
+
+.add-class-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.add-class-btn:hover {
+  background-color: #218838;
+}
+
+/* Scrollable styling */
+html {
+  overflow: scroll;
+  
+}
+
+/* Text styling */
+
+
+.weekly-schedule {
+  color: whitesmoke;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.classDetail{
+  margin-top: 20px;
+}
+.classDetail p{
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  color: #000000;
+}
+.button-container {
+  display: flex;           /* Use flexbox for horizontal alignment */
+  gap: 20px;               /* Add space between the buttons */
+  margin-top: 20px;        /* Add margin if needed */
+}
+
+/* Add class button - hover effect */
+button.add-class-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+button.add-class-btn:hover {
+  background-color: #218838;
+}
+
+
+.close-btn{
+  background-color: rgb(239, 29, 29);
+}
+.close-btn:hover{
+  background-color: rgb(200, 26, 26);
+}
+
+/* Edit Class button */
+
+
+
+
+/* Ensure visibility of buttons */
+button {
+  display: inline-block;
+  background-color: #007bff; /* Blue background */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+.classStatus{
+  color: rgb(65, 65, 65);
+}
+
+
+/* Button-specific classes */
+
+.add-class-btn {
+  background-color: #28a745;
+}
+
+.add-class-btn:hover {
+  background-color: #218838;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-form {
+  padding-left: 100px;
+  padding-right: 100px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  height: 350px;
+  width: 650px;
+}
+
+.modal-form .form-group {
+  margin-bottom: 20px;
+}
+h3{
+  text-align: center;
+}
+.submit-btn {
+  border-radius: 15px !important;
+  background-color: #007bff !important;
+  margin-bottom: 20px;
+
+}
+
+.submit-btn:hover {
+  background-color: #0056b3 !important;
+}
+
+
