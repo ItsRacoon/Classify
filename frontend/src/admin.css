@@ -1,0 +1,141 @@
+/* General container */
+.teacher-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #122b44;
+  }
+  
+  /* Rectangle box */
+  .rectangle-box {
+    background-color: #1a0606;
+    border: 1px solid #090606;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 400px;
+    margin-bottom: 30px;
+  }
+  
+  .rectangle-box h2 {
+    text-align: center;
+    color: #e6cfcf;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #e6dede;
+  }
+  
+  input[type="text"],
+  select,
+  input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button.submit-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  button.submit-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  p {
+    font-size: 12px;
+    color: #e5e0e0;
+  }
+  
+  /* Table styles */
+  .table-container {
+    margin-top: 20px;
+  }
+  
+  .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 16px;
+    min-width: 800px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .styled-table th,
+  .styled-table td {
+    text-align: center;
+    padding: 12px;
+    height: 100px;
+    border: 1px solid black;
+    width:10px;
+  }
+  
+  .styled-table th {
+    background-color: #000000;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  
+  .styled-table tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+  }
+  
+  .add-class-btncr {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin:5px ;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .add-class-btnup {
+    background-color: rgb(118, 39, 192);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin:5px ;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .add-class-btndl {
+    background-color: rgb(221, 57, 57);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin:5px ;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  
+  .add-class-btn:hover {
+    background-color: #218838;
+  }
+  html{
+    overflow: scroll;
+
+  }
