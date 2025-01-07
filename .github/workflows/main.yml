@@ -1,0 +1,50 @@
+name: Feedback on Push
+
+on:
+  push:
+    branches:
+      - main  # Trigger on pushes to the 'main' branch
+      - master  # Or trigger on 'master' branch
+
+jobs:
+  feedback-job:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu environment for the job
+
+    steps:
+      # Step 1: Checkout repository code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up a Python environment (optional, for feedback scripts)
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      # Step 3: Run feedback script
+      - name: Run feedback logic
+        run: |
+          echo "Starting feedback process..."
+          # Example: Check if README.md exists
+          if [[ -f "README.md" ]]; then
+            echo "✅ README.md is present. Good job!"
+          else
+            echo "❌ README.md is missing. Please add a README to your repository."
+          fi
+          # Example: Check if code compiles (replace with your commands)
+          if ! javac src/Main.java; then
+            echo "❌ Java code has compile errors. Please fix them."
+          else
+            echo "✅ Java code compiled successfully."
+          fi
+          echo "Feedback process complete."
+
+      # Step 4: Optionally, add results as a comment on the commit or PR
+      - name: Post a comment
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.payload.pull_request?.number || context.payload.after,
+              body: "Feedback: The push triggered automated feedback. Please check the results in the Actions tab. 🚀"
+            })
